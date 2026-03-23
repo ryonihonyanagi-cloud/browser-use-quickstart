@@ -382,6 +382,8 @@
           <dd>「Command Line Interface」の略。マウスを使わず、文字（コマンド）で操作するタイプのソフトウェアのこと。今回インストールするのは Browser Use の CLI 版です。</dd>
           <dt>オープンソース</dt>
           <dd>設計図（ソースコード）が公開されているソフトウェア。誰でも無料で使えて、世界中の開発者が改善に参加できます。Browser Use もオープンソースです。</dd>
+          <dt>Claude Code</dt>
+          <dd>Anthropic が提供する CLI ツール。ターミナルで <code>claude</code> と打ち込んで使います。Browser Use はこの Claude Code を「頭脳」として使い、ブラウザ操作の判断を任せます。</dd>
         </dl>
       </div>
 
@@ -429,12 +431,12 @@
       <div class="glossary">
         <div class="g-title">📖 用語解説</div>
         <dl>
-          <dt>API（エーピーアイ）</dt>
-          <dd>「Application Programming Interface」の略。あるソフトウェアの機能を、別のソフトウェアから呼び出すための「窓口」です。Claude の API を使うと、自分のプログラムから Claude を動かせます。</dd>
           <dt>APIキー</dt>
-          <dd>APIを使うための「鍵」となる文字列。あなた専用のパスワードのようなもので、「このキーを持つ人だけ Claude を使える」という認証に使います。</dd>
+          <dd>CLIツールが「誰のアカウントで動くか」を確認するための鍵となる文字列。Browser Use が裏側で Claude を動かすとき、この鍵を提示して「このユーザーの許可がある」と証明します。パスワードと同じで、他人に見せてはいけません。</dd>
+          <dt>CLI（シーエルアイ）ツール</dt>
+          <dd>「Command Line Interface」の略。ターミナルでコマンドを打ち込んで使うタイプのソフトウェア。Claude Code も Browser Use も CLI ツールです。GUIアプリ（マウスで操作するもの）と対比して使われる言葉です。</dd>
           <dt>環境変数</dt>
-          <dd>パソコン全体で共有する「設定値の保管場所」。ここにAPIキーを登録しておくと、あらゆるツールが自動でキーを読み取れます。毎回手入力しなくて済む仕組みです。</dd>
+          <dd>パソコン全体で共有する「設定値の保管場所」。ここにAPIキーを登録しておくと、あらゆる CLI ツールが自動でキーを読み取れます。毎回手入力しなくて済む仕組みです。</dd>
         </dl>
       </div>
 
@@ -459,7 +461,7 @@
 
       <div class="know-box">
         <div class="know-title">💡 なぜこの作業が必要なの？</div>
-        Browser Use が Claude を呼び出すとき、「どのアカウントで使うか」を確認するためにAPIキーを参照します。環境変数に登録しておけば、毎回入力しなくてもOK。エンジニアが日常的にやっている作業です。
+        Browser Use（CLI）が Claude Code（CLI）を呼び出すとき、「どのアカウントで動いていいか」を確認するためにAPIキーを参照します。環境変数に登録しておけば、毎回入力しなくてもOK。エンジニアが日常的にやっている作業です。
       </div>
       <div class="achievement">✅ ステップ4完了！Claude と通信できるようになった</div>
     </div>
