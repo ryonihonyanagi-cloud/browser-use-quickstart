@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browser Use CLI — フォーム営業を自動化する</title>
+  <title>Claude Code でフォーム営業を自動化する — B4B セットアップガイド</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --pink:    #A51E6D;
-      --pink-md: #C06299;
       --pink-lt: #F6E9F0;
       --green:   #039578;
+      --green-lt:#E6F4F2;
       --gray:    #333333;
-      --gray-md: #858585;
+      --gray-md: #707070;
       --gray-lt: #EBEBEB;
       --white:   #FFFFFF;
     }
@@ -22,104 +22,114 @@
       font-family: 'Noto Sans JP', sans-serif;
       color: var(--gray);
       background: var(--white);
-      line-height: 1.7;
+      line-height: 1.8;
       font-size: 16px;
     }
 
-    a { color: var(--pink); }
+    a { color: var(--pink); text-underline-offset: 3px; }
 
-    /* HERO */
+    /* ─── HERO ─── */
     .hero {
       background: linear-gradient(135deg, #FF5757, #8C52FF);
       color: var(--white);
-      padding: 80px 40px;
+      padding: 80px 32px;
       text-align: center;
     }
-    .hero .label {
+    .hero .eyebrow {
       font-size: 12px;
       letter-spacing: .14em;
       text-transform: uppercase;
-      opacity: .8;
+      opacity: .75;
       margin-bottom: 16px;
     }
     .hero h1 {
-      font-size: clamp(26px, 5vw, 48px);
+      font-size: clamp(26px, 5vw, 46px);
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
-    .hero p {
+    .hero .sub {
       font-size: 17px;
-      max-width: 580px;
-      margin: 0 auto 40px;
+      max-width: 560px;
+      margin: 0 auto 36px;
       opacity: .92;
     }
-    .hero .badges {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .badge {
+    .hero .pill {
       display: inline-block;
-      background: rgba(255,255,255,.2);
-      border: 1px solid rgba(255,255,255,.4);
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
       border-radius: 40px;
       padding: 8px 20px;
       font-size: 13px;
     }
 
-    /* LAYOUT */
-    .container {
-      max-width: 760px;
+    /* ─── LAYOUT ─── */
+    .wrap {
+      max-width: 720px;
       margin: 0 auto;
       padding: 0 24px;
     }
-    section {
-      padding: 72px 0;
-    }
-    section + section {
-      border-top: 1px solid var(--gray-lt);
-    }
+    section { padding: 64px 0; }
+    section + section { border-top: 1px solid var(--gray-lt); }
 
     h2 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
-      margin-bottom: 32px;
+      line-height: 1.3;
       padding-left: 16px;
       border-left: 4px solid var(--pink);
-      line-height: 1.3;
+      margin-bottom: 28px;
     }
+    p { margin-bottom: 14px; }
 
-    p { margin-bottom: 16px; }
-
-    /* WHAT IS */
-    .cards {
+    /* ─── OVERVIEW CARDS ─── */
+    .overview {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
       margin: 24px 0;
     }
-    .card {
+    .ov-card {
       background: var(--pink-lt);
       border-radius: 12px;
-      padding: 24px 20px;
+      padding: 20px 16px;
       text-align: center;
     }
-    .card .num {
-      font-size: 36px;
+    .ov-card .big {
+      font-size: 32px;
       font-weight: 800;
       color: var(--pink);
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    .card p { font-size: 13px; margin: 0; color: var(--gray); }
+    .ov-card small { font-size: 13px; color: var(--gray-md); }
 
-    /* STEPS */
+    /* ─── FLOW ─── */
+    .flow-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 28px 0;
+    }
+    .flow-box {
+      background: var(--white);
+      border: 2px solid var(--pink);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .flow-arr { color: var(--pink); font-size: 20px; }
+
+    /* ─── STEPS ─── */
     .step {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       margin-bottom: 48px;
+      align-items: flex-start;
     }
     .step-num {
       flex-shrink: 0;
@@ -134,135 +144,138 @@
       align-items: center;
       justify-content: center;
     }
-    .step-body { flex: 1; }
+    .step-body { flex: 1; min-width: 0; }
     .step-body h3 {
       font-size: 18px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .step-body .why {
+      font-size: 13px;
+      color: var(--gray-md);
+      margin-bottom: 14px;
+      padding-left: 12px;
+      border-left: 2px solid var(--gray-lt);
     }
 
-    /* CODE */
+    /* ─── CODE BLOCK ─── */
+    .code-wrap {
+      position: relative;
+      margin: 14px 0;
+    }
+    .code-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray-md);
+      margin-bottom: 6px;
+    }
     pre {
       background: #1e1e1e;
       color: #d4d4d4;
       border-radius: 10px;
-      padding: 20px 24px;
+      padding: 18px 20px;
       font-size: 14px;
       overflow-x: auto;
-      margin: 14px 0;
       line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-all;
     }
-    code {
-      font-family: 'Menlo', 'Courier New', monospace;
-    }
-    .comment { color: #6a9955; }
-    .cmd { color: #9cdcfe; }
-    .str { color: #ce9178; }
+    code { font-family: 'Menlo', 'Courier New', monospace; }
+    .c { color: #6a9955; }   /* comment */
+    .k { color: #9cdcfe; }   /* keyword/cmd */
+    .s { color: #ce9178; }   /* string */
 
-    /* INLINE CODE */
-    p code, li code {
+    /* inline code */
+    p code, li code, td code {
       background: var(--gray-lt);
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-size: 13px;
       color: var(--pink);
     }
 
-    /* NOTE / TIP */
+    /* ─── NOTE / TIP ─── */
     .note {
       background: var(--pink-lt);
       border-left: 4px solid var(--pink);
       border-radius: 0 10px 10px 0;
-      padding: 16px 20px;
+      padding: 14px 18px;
       font-size: 14px;
-      margin: 16px 0;
-      line-height: 1.6;
+      margin: 14px 0;
+      line-height: 1.7;
     }
     .note strong { color: var(--pink); }
-
     .tip {
-      background: #e6f4f2;
+      background: var(--green-lt);
       border-left: 4px solid var(--green);
       border-radius: 0 10px 10px 0;
-      padding: 16px 20px;
+      padding: 14px 18px;
       font-size: 14px;
-      margin: 16px 0;
-      line-height: 1.6;
+      margin: 14px 0;
+      line-height: 1.7;
     }
     .tip strong { color: var(--green); }
 
-    /* TERMINAL HINT */
-    .terminal-hint {
-      background: var(--gray-lt);
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin: 20px 0;
-      font-size: 14px;
-    }
-    .terminal-hint h4 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--pink);
-    }
-    .terminal-hint ol { padding-left: 20px; }
-    .terminal-hint li { margin-bottom: 6px; }
+    /* ─── KEYBOARD ─── */
     kbd {
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 4px;
-      padding: 2px 6px;
+      padding: 2px 7px;
       font-size: 12px;
       font-family: monospace;
       box-shadow: 0 1px 0 #ccc;
     }
 
-    /* B4B FLOW */
-    .b4b-box {
-      background: var(--pink-lt);
-      border-radius: 16px;
-      padding: 40px 32px;
-      text-align: center;
+    /* ─── HOW-TO OPEN TERMINAL ─── */
+    .terminal-box {
+      background: var(--gray-lt);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 16px 0;
     }
-    .b4b-box h3 {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 24px;
-    }
-    .flow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 32px;
-    }
-    .flow-item {
-      background: var(--white);
-      border: 2px solid var(--pink);
-      border-radius: 8px;
-      padding: 10px 18px;
+    .terminal-box h4 {
       font-size: 14px;
       font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--pink);
     }
-    .flow-arrow { color: var(--pink); font-size: 20px; font-weight: 700; }
+    .terminal-box ol { padding-left: 20px; }
+    .terminal-box li { margin-bottom: 8px; font-size: 14px; }
 
-    /* FAQ */
-    .faq-item {
-      border: 1px solid var(--gray-lt);
+    /* ─── PASTE HINT ─── */
+    .paste-hint {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fffbe6;
+      border: 1px solid #f5d000;
       border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+    .paste-hint .icon { font-size: 24px; flex-shrink: 0; }
+
+    /* ─── FAQ ─── */
+    .faq {
+      border: 1px solid var(--gray-lt);
+      border-radius: 12px;
       padding: 20px 24px;
       margin-bottom: 16px;
     }
-    .faq-item h4 {
+    .faq h4 {
       font-size: 15px;
       font-weight: 700;
-      margin-bottom: 8px;
       color: var(--pink);
+      margin-bottom: 8px;
     }
-    .faq-item p { margin: 0; font-size: 14px; }
+    .faq p { margin: 0; font-size: 14px; line-height: 1.7; }
 
-    /* FOOTER */
+    /* ─── FOOTER ─── */
     footer {
       text-align: center;
       padding: 48px 24px;
@@ -272,9 +285,9 @@
     }
     footer a { color: var(--pink); }
 
-    @media (max-width: 600px) {
+    @media (max-width: 560px) {
       .step { flex-direction: column; gap: 12px; }
-      .hero { padding: 56px 24px; }
+      .hero { padding: 56px 20px; }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
@@ -283,221 +296,256 @@
 
 <!-- HERO -->
 <div class="hero">
-  <p class="label">B4B × Claude Code 自動化ガイド</p>
-  <h1>フォーム営業を<br>AIに丸投げする</h1>
-  <p>Browser Use を使えば、Claude Code がブラウザを自動操作してフォーム送信までやってくれる。難しい設定は不要。このページの手順通りに進めればOK。</p>
-  <div class="badges">
-    <span class="badge">⚡ 速度2倍・コスト半額（2025年3月）</span>
-    <span class="badge">🖥️ Mac / Windows 対応</span>
-  </div>
+  <p class="eyebrow">B4B 自動化セットアップガイド</p>
+  <h1>フォーム営業を<br>Claude に任せる</h1>
+  <p class="sub">企業のURLリストを渡すだけで、フォームへの入力・送信・記録まで自動でやってくれます。このページの手順を上から順に進めるだけでOKです。</p>
+  <span class="pill">⏱ 所要時間の目安：30〜60分（初回のみ）</span>
 </div>
 
-<div class="container">
+<div class="wrap">
 
-<!-- WHAT IS -->
+<!-- ─── 全体の流れ ─── -->
 <section>
-  <h2>Browser Use って何？</h2>
+  <h2>何ができるようになるの？</h2>
   <p>
-    AIがChromeを「目で見て・手で操作する」ように動かせるオープンソースのツールです。
-    Claude Code に「このフォームに入力して送信して」と日本語で指示するだけで、実際に画面を操作してくれます。
+    「Browser Use（ブラウザ・ユーズ）」というツールを使うと、Claude Code がパソコンのブラウザ（Chrome）を代わりに操作してくれます。
+    あなたは企業のURLリストを用意して指示を出すだけ。あとは Claude が自動でフォームを探して、内容を入力して、送信してくれます。
   </p>
-  <div class="cards">
-    <div class="card">
-      <div class="num">2×</div>
-      <p>従来比2倍の速度</p>
+  <div class="overview">
+    <div class="ov-card">
+      <div class="big">2×</div>
+      <small>従来より2倍速い</small>
     </div>
-    <div class="card">
-      <div class="num">½</div>
-      <p>コストが半額</p>
+    <div class="ov-card">
+      <div class="big">½</div>
+      <small>コストが半額</small>
     </div>
-    <div class="card">
-      <div class="num">CDP</div>
-      <p>普段使いのChromeに<br>そのまま接続できる</p>
-    </div>
-  </div>
-  <div class="tip">
-    <strong>B4Bへの直結ポイント：</strong>
-    企業URLのリストを渡せば、フォーム入力→送信→結果記録まで自動でこなします。担当者が一件ずつ手入力する作業を、まるごと自動化できます。
-  </div>
-</section>
-
-<!-- BEFORE START -->
-<section>
-  <h2>始める前に確認すること</h2>
-
-  <div class="step">
-    <div class="step-num">✓</div>
-    <div class="step-body">
-      <h3>ターミナル（黒い画面）の開き方</h3>
-      <p>これ以降の手順は、すべてターミナルに文字を入力して進めます。</p>
-      <div class="terminal-hint">
-        <h4>📌 Macの場合</h4>
-        <ol>
-          <li>キーボードで <kbd>⌘ Command</kbd> + <kbd>スペース</kbd> を押す</li>
-          <li>「ターミナル」と入力して <kbd>Enter</kbd></li>
-          <li>黒または白いウィンドウが開いたらOK</li>
-        </ol>
-      </div>
-      <div class="terminal-hint">
-        <h4>📌 Windowsの場合</h4>
-        <ol>
-          <li>スタートメニューを右クリック</li>
-          <li>「Windows PowerShell」または「ターミナル」をクリック</li>
-        </ol>
-      </div>
-      <div class="note">
-        <strong>コマンドの実行方法：</strong> この後に出てくるコードブロック（黒い背景の部分）をコピーして、ターミナルに貼り付けて <kbd>Enter</kbd> を押すだけです。
-      </div>
+    <div class="ov-card">
+      <div class="big">🤖</div>
+      <small>手入力ゼロ</small>
     </div>
   </div>
-
-  <div class="step">
-    <div class="step-num">✓</div>
-    <div class="step-body">
-      <h3>Anthropic の API キーを用意する</h3>
-      <p>Claude Code を動かすための「鍵」です。まだ持っていない場合は先に取得してください。</p>
-      <ol style="padding-left:20px; margin-bottom:12px;">
-        <li style="margin-bottom:6px;"><a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> にアクセス（Googleアカウントでログイン可）</li>
-        <li style="margin-bottom:6px;">左メニューの「API Keys」→「Create Key」</li>
-        <li style="margin-bottom:6px;"><code>sk-ant-...</code> で始まる文字列をメモ帳などに控えておく</li>
-      </ol>
-      <div class="note">
-        <strong>注意：</strong> APIキーは一度しか表示されません。必ずその場でコピーしてどこかに保存してください。
-      </div>
-    </div>
+  <p>完成したら、こんな流れで動かせます：</p>
+  <div class="flow-row">
+    <div class="flow-box">📋<br>企業URLリスト</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box">🔍<br>フォームを探す</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box">✍️<br>自動で入力・送信</div>
+    <div class="flow-arr">→</div>
+    <div class="flow-box">📊<br>結果を記録</div>
   </div>
 </section>
 
-<!-- INSTALL -->
+<!-- ─── 「黒い画面」について ─── -->
 <section>
-  <h2>インストール手順（5ステップ）</h2>
+  <h2>まず「黒い画面」を開こう</h2>
+  <p>
+    これから行う作業のほとんどは、<strong>「ターミナル」</strong>（黒または白い画面）という場所で進めます。
+    難しそうに見えますが、やることはシンプルです。<br>
+    <strong>「決まった文字列を貼り付けて、Enterキーを押す」</strong>——これだけです。
+  </p>
+
+  <div class="paste-hint">
+    <div class="icon">💡</div>
+    <div>このページに出てくる<strong>黒い背景のコード</strong>は、全部コピーしてターミナルに貼り付ければ動きます。自分で打ち込む必要はありません。</div>
+  </div>
+
+  <div class="terminal-box">
+    <h4>📍 Macでターミナルを開く方法</h4>
+    <ol>
+      <li>キーボードの <kbd>⌘ Command</kbd> と <kbd>スペース</kbd> を同時に押す</li>
+      <li>画面上部に検索窓が出るので「<strong>ターミナル</strong>」と入力</li>
+      <li>「ターミナル」が表示されたら <kbd>Enter</kbd> を押す</li>
+      <li>黒または白いウィンドウが開いたらOK</li>
+    </ol>
+  </div>
+
+  <div class="terminal-box">
+    <h4>📍 Windowsでターミナルを開く方法</h4>
+    <ol>
+      <li>画面左下のスタートボタンを<strong>右クリック</strong></li>
+      <li>「<strong>Windows PowerShell</strong>」または「<strong>ターミナル</strong>」をクリック</li>
+    </ol>
+  </div>
+
+  <div class="note">
+    <strong>英語の文字が流れても大丈夫：</strong> コマンドを実行すると英語がたくさん流れますが、エラーでなければ問題ありません。最後の行が <code>$</code> や <code>&gt;</code> で終わっていれば「待機中（次のコマンドを受け付けています）」のサインです。
+  </div>
+</section>
+
+<!-- ─── STEP 1: uv ─── -->
+<section>
+  <h2>セットアップ手順</h2>
 
   <div class="step">
     <div class="step-num">1</div>
     <div class="step-body">
-      <h3>uv をインストールする</h3>
-      <p>Python 製ツールを簡単に管理できるインストーラーです。まずこれを入れます。</p>
-      <pre><code><span class="comment"># Mac / Linux の場合</span>
-<span class="cmd">curl -LsSf https://astral.sh/uv/install.sh | sh</span></code></pre>
-      <pre><code><span class="comment"># Homebrew を使っている場合はこちらでも OK</span>
-<span class="cmd">brew install uv</span></code></pre>
+      <h3>ツールの土台をインストールする</h3>
+      <p class="why">これ以降のツールをスムーズに入れるための「基盤」です。最初に一度だけ行います。</p>
+      <p>ターミナルを開いて、以下をコピー&amp;貼り付けして <kbd>Enter</kbd> を押してください。</p>
+      <div class="code-wrap">
+        <div class="code-label">Mac / Linux の場合</div>
+        <pre><code><span class="k">curl -LsSf https://astral.sh/uv/install.sh | sh</span></code></pre>
+      </div>
+      <div class="code-wrap">
+        <div class="code-label">Mac で Homebrew を使っている場合はこちらでも OK</div>
+        <pre><code><span class="k">brew install uv</span></code></pre>
+      </div>
       <div class="tip">
-        <strong>完了の確認：</strong> コマンドが終わったら、一度ターミナルを閉じて再度開いてください。その後 <code>uv --version</code> と入力して、バージョンが表示されればOKです。
+        <strong>完了の確認：</strong> ターミナルを一度閉じて、もう一度開いてください。
+        その後 <code>uv --version</code> と入力して <kbd>Enter</kbd>。数字が表示されればOKです。
       </div>
     </div>
   </div>
 
+  <!-- STEP 2 -->
   <div class="step">
     <div class="step-num">2</div>
     <div class="step-body">
       <h3>Browser Use をインストールする</h3>
-      <pre><code><span class="cmd">uv tool install "browser-use[cli]"</span></code></pre>
+      <p class="why">Claude がブラウザを操作するための本体です。</p>
+      <div class="code-wrap">
+        <pre><code><span class="k">uv tool install "browser-use[cli]"</span></code></pre>
+      </div>
       <div class="tip">
-        <strong>完了の確認：</strong> <code>browser-use --version</code> と入力してバージョンが表示されればOK。
+        <strong>完了の確認：</strong> <code>browser-use --version</code> を実行してバージョンが出ればOK。
       </div>
     </div>
   </div>
 
+  <!-- STEP 3 -->
   <div class="step">
     <div class="step-num">3</div>
     <div class="step-body">
-      <h3>ブラウザ自動化エンジンをセットアップする</h3>
-      <p>Browser Use が使う専用のChromeエンジンをダウンロードします。少し時間がかかります。</p>
-      <pre><code><span class="cmd">playwright install chromium</span></code></pre>
+      <h3>自動操作用のブラウザをダウンロードする</h3>
+      <p class="why">Claude が裏で使う専用のブラウザをダウンロードします。あなたが普段使うChromeとは別物なので、普段の設定には影響しません。</p>
+      <div class="code-wrap">
+        <pre><code><span class="k">playwright install chromium</span></code></pre>
+      </div>
       <div class="note">
         <strong>「playwright が見つかりません」と出た場合：</strong><br>
-        <code>uv tool install playwright</code> を先に実行してから、再度上のコマンドを試してください。
+        まず <code>uv tool install playwright</code> を実行してから、もう一度上のコマンドを試してください。
       </div>
     </div>
   </div>
 
+  <!-- STEP 4 -->
   <div class="step">
     <div class="step-num">4</div>
     <div class="step-body">
-      <h3>APIキーを設定する</h3>
-      <p>さきほど取得した <code>sk-ant-...</code> のキーを設定します。</p>
-      <pre><code><span class="comment"># Mac / Linux の場合（以下を1行ずつ実行）</span>
-<span class="cmd">echo 'export ANTHROPIC_API_KEY="sk-ant-ここにキーを貼る"' >> ~/.zshrc</span>
-<span class="cmd">source ~/.zshrc</span></code></pre>
-      <pre><code><span class="comment"># Windows PowerShell の場合</span>
-<span class="cmd">$env:ANTHROPIC_API_KEY="sk-ant-ここにキーを貼る"</span></code></pre>
+      <h3>Claude を動かすための「鍵」を設定する</h3>
+      <p class="why">Claude を使うには、自分専用の「APIキー」が必要です。これは Claude に「あなたのアカウントで動いてください」と伝えるための合言葉です。</p>
+
+      <p><strong>① まず APIキー を取得する</strong></p>
+      <ol style="padding-left:20px; margin-bottom:16px; font-size:15px;">
+        <li style="margin-bottom:8px;"><a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> を開く（Googleアカウントでログインできます）</li>
+        <li style="margin-bottom:8px;">左のメニューから「<strong>API Keys</strong>」をクリック</li>
+        <li style="margin-bottom:8px;">「<strong>Create Key</strong>」ボタンを押す</li>
+        <li style="margin-bottom:8px;"><code>sk-ant-</code> で始まる長い文字列が表示されるので、<strong>必ずコピーしてメモ帳などに保存</strong>（このページを閉じると二度と見られません）</li>
+      </ol>
+
+      <p><strong>② パソコンにキーを記憶させる</strong></p>
+      <p>以下のコマンドの <code>sk-ant-ここにキーを貼る</code> 部分を、取得したキーに置き換えてから実行してください。</p>
+      <div class="code-wrap">
+        <div class="code-label">Mac / Linux の場合（2行を順番に実行）</div>
+        <pre><code><span class="k">echo 'export ANTHROPIC_API_KEY="sk-ant-ここにキーを貼る"' >> ~/.zshrc</span>
+<span class="k">source ~/.zshrc</span></code></pre>
+      </div>
+      <div class="code-wrap">
+        <div class="code-label">Windows の場合</div>
+        <pre><code><span class="k">$env:ANTHROPIC_API_KEY="sk-ant-ここにキーを貼る"</span></code></pre>
+      </div>
       <div class="note">
-        <strong>注意：</strong> <code>sk-ant-ここにキーを貼る</code> の部分を、実際のAPIキーに置き換えてください。クォート（ <code>"</code> ）は消さないこと。
+        <strong>ポイント：</strong> <code>sk-ant-ここにキーを貼る</code> の部分だけを書き換えてください。前後の <code>"</code>（ダブルクォーテーション）は消さないようにしてください。
       </div>
     </div>
   </div>
 
+  <!-- STEP 5 -->
   <div class="step">
     <div class="step-num">5</div>
     <div class="step-body">
-      <h3>動作確認</h3>
-      <p>試しに動かしてみましょう。Chromeが自動で操作されれば成功です。</p>
-      <pre><code><span class="cmd">browser-use "Googleを開いて、検索窓に『Browser Use』と入力して"</span></code></pre>
+      <h3>試しに動かしてみる</h3>
+      <p class="why">ここまでの設定が正しくできているか確かめます。</p>
+      <div class="code-wrap">
+        <pre><code><span class="k">browser-use "Googleを開いて、検索窓に「Browser Use」と入力して"</span></code></pre>
+      </div>
       <div class="tip">
-        <strong>成功すると：</strong> 自動でChromeが起動して、Googleで検索を実行します。これができればインストール完了です。
+        <strong>成功すると：</strong> 自動でブラウザが開いて、Googleで検索が実行されます。これが確認できればセットアップ完了です！
+      </div>
+      <div class="note">
+        <strong>エラーが出た場合：</strong> エラーメッセージをそのままコピーして、Claude（またはChatGPT）に「このエラーどうすればいい？」と貼り付けて聞くのが一番早い解決方法です。
       </div>
     </div>
   </div>
 </section>
 
-<!-- B4B USE CASE -->
+<!-- ─── 実際に使う ─── -->
 <section>
-  <h2>フォーム営業への応用</h2>
-
-  <div class="b4b-box">
-    <h3>自動化できる一連の流れ</h3>
-    <div class="flow">
-      <div class="flow-item">📋 企業URLリスト</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-item">🔍 フォーム検出</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-item">✍️ 自動入力・送信</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-item">📊 結果を記録</div>
-    </div>
+  <h2>フォーム営業で実際に使う</h2>
+  <p>
+    セットアップが終わったら、こんなふうに使えます。
+    まずは <strong>1社だけで試してみる</strong>ことをおすすめします。動作を確認してから、複数社に広げてください。
+  </p>
+  <div class="code-wrap">
+    <div class="code-label">1社で試す場合</div>
+    <pre><code><span class="k">browser-use "https://example.com/contact のお問い合わせフォームに
+会社名『B4B』、担当者名『山田』、
+メッセージ『サービスについて詳しくお聞きしたいです』
+と入力して、送信ボタンを押してください"</span></code></pre>
   </div>
-
-  <p style="margin-top:24px;">企業URLを並べたCSVファイルを用意して、以下のように Claude Code に指示するだけで動きます。</p>
-  <pre><code><span class="cmd">browser-use "companies.csv を読み込んで、各企業のお問い合わせフォームに
-会社名『B4B』、担当者名『山田』、メッセージ『〇〇についてご相談したい』
-と入力して送信してください。送信できた企業を result.csv に記録してください。"</span></code></pre>
+  <div class="code-wrap">
+    <div class="code-label">CSVリストで複数社に一括送信する場合</div>
+    <pre><code><span class="k">browser-use "companies.csv を読み込んで、
+各企業のお問い合わせフォームに
+会社名『B4B』、担当者名『山田』、
+メッセージ『〇〇についてご相談したいです』
+と入力して送信してください。
+送信できた企業名を result.csv に記録してください"</span></code></pre>
+  </div>
   <div class="note">
-    <strong>まず小さく始めるのがおすすめ：</strong> 最初は1社だけのURLで試してみてください。動作を確認してから、複数社に広げると安心です。
+    <strong>companies.csv について：</strong> 企業のURLを縦に並べたExcelファイル（CSV形式）を用意してください。作り方が分からない場合は、ChatGPTに「企業URLをまとめたCSVファイルの作り方を教えて」と聞くとすぐ教えてくれます。
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- ─── FAQ ─── -->
 <section>
   <h2>よくある質問</h2>
 
-  <div class="faq-item">
-    <h4>Q. Pythonは必要ですか？</h4>
-    <p>uv が自動で管理するので、Pythonを別途インストールする必要はありません。</p>
+  <div class="faq">
+    <h4>Q. パソコンの知識がなくても大丈夫？</h4>
+    <p>このページの手順を順番に進めれば問題ありません。分からない言葉が出てきたら、そのままChatGPTや Claude に「〇〇ってどういう意味？」と聞いてください。</p>
   </div>
 
-  <div class="faq-item">
-    <h4>Q. エラーが出て進めない場合は？</h4>
-    <p>エラーメッセージをそのままコピーして Claude Code（または ChatGPT）に貼り付けて「これどうすればいい？」と聞くのが一番早いです。</p>
+  <div class="faq">
+    <h4>Q. エラーが出て止まった。どうすればいい？</h4>
+    <p>ターミナルに表示されているエラーメッセージをすべてコピーして、Claude または ChatGPT に「このエラーが出ました。どうすれば解決できますか？」と貼り付けて聞いてください。たいていすぐ解決します。</p>
   </div>
 
-  <div class="faq-item">
-    <h4>Q. 既存のChromeをそのまま使えますか？</h4>
-    <p>はい。<code>--cdp-url http://localhost:9222</code> オプションで、ログイン済みのChromeに直接接続できます。サイトへのログインも引き継がれます。</p>
+  <div class="faq">
+    <h4>Q. 費用はどのくらいかかる？</h4>
+    <p>フォーム送信の件数と内容によりますが、シンプルな内容で100件あたり数十〜数百円程度が目安です。最初は少ない件数で試して、実際のコストを確認することをおすすめします。</p>
   </div>
 
-  <div class="faq-item">
-    <h4>Q. コストはどのくらいかかりますか？</h4>
-    <p>タスクの複雑さとフォーム数によります。目安として、シンプルなフォーム100件あたり数十円〜数百円程度です。/compact コマンドでセッションを圧縮するとコストを抑えられます。</p>
+  <div class="faq">
+    <h4>Q. 普段使っているChromeのパスワードやログイン情報は影響を受ける？</h4>
+    <p>影響しません。Browser Use は専用の別ブラウザを使うので、普段のChromeの設定やデータには一切触れません。</p>
+  </div>
+
+  <div class="faq">
+    <h4>Q. Macじゃないと使えない？</h4>
+    <p>Windows でも使えます。手順の一部（ターミナルの開き方やコマンドの書き方）が異なりますが、このページに両方の方法を記載しています。</p>
   </div>
 </section>
 
-</div><!-- /container -->
+</div><!-- /wrap -->
 
 <footer>
-  B4B × Claude Code 自動化ガイド<br>
-  <a href="https://github.com/browser-use/browser-use" target="_blank">Browser Use 公式リポジトリ（GitHub）</a>
+  B4B 自動化セットアップガイド<br>
+  <a href="https://github.com/browser-use/browser-use" target="_blank">Browser Use 公式ページ（英語）</a>
   &nbsp;·&nbsp;
-  <a href="https://console.anthropic.com" target="_blank">Anthropic Console（APIキー）</a>
+  <a href="https://console.anthropic.com" target="_blank">APIキーを取得する（Anthropic）</a>
 </footer>
 
 </body>
