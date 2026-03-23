@@ -9,9 +9,11 @@
 
     :root {
       --pink:    #A51E6D;
+      --pink-md: #C06299;
       --pink-lt: #F6E9F0;
       --green:   #039578;
       --gray:    #333333;
+      --gray-md: #858585;
       --gray-lt: #EBEBEB;
       --white:   #FFFFFF;
     }
@@ -20,8 +22,11 @@
       font-family: 'Noto Sans JP', sans-serif;
       color: var(--gray);
       background: var(--white);
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 16px;
     }
+
+    a { color: var(--pink); }
 
     /* HERO */
     .hero {
@@ -31,84 +36,90 @@
       text-align: center;
     }
     .hero .label {
-      font-size: 13px;
-      letter-spacing: .12em;
+      font-size: 12px;
+      letter-spacing: .14em;
       text-transform: uppercase;
       opacity: .8;
       margin-bottom: 16px;
     }
     .hero h1 {
-      font-size: clamp(28px, 5vw, 48px);
+      font-size: clamp(26px, 5vw, 48px);
       font-weight: 800;
       line-height: 1.25;
       margin-bottom: 24px;
     }
     .hero p {
-      font-size: 18px;
-      max-width: 600px;
+      font-size: 17px;
+      max-width: 580px;
       margin: 0 auto 40px;
-      opacity: .9;
+      opacity: .92;
     }
-    .hero .badge {
+    .hero .badges {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .badge {
       display: inline-block;
       background: rgba(255,255,255,.2);
       border: 1px solid rgba(255,255,255,.4);
       border-radius: 40px;
-      padding: 8px 24px;
-      font-size: 14px;
+      padding: 8px 20px;
+      font-size: 13px;
     }
 
-    /* SECTION */
-    section {
-      padding: 72px 24px;
+    /* LAYOUT */
+    .container {
       max-width: 760px;
       margin: 0 auto;
+      padding: 0 24px;
     }
-    section + section { border-top: 1px solid var(--gray-lt); }
+    section {
+      padding: 72px 0;
+    }
+    section + section {
+      border-top: 1px solid var(--gray-lt);
+    }
 
     h2 {
-      font-size: 26px;
-      font-weight: 700;
+      font-size: 24px;
+      font-weight: 800;
       margin-bottom: 32px;
       padding-left: 16px;
       border-left: 4px solid var(--pink);
+      line-height: 1.3;
     }
-    h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--pink);
-    }
-    p { margin-bottom: 16px; font-size: 16px; }
+
+    p { margin-bottom: 16px; }
 
     /* WHAT IS */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 16px;
-      margin-top: 8px;
+      margin: 24px 0;
     }
     .card {
       background: var(--pink-lt);
       border-radius: 12px;
-      padding: 24px;
+      padding: 24px 20px;
+      text-align: center;
     }
     .card .num {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 800;
       color: var(--pink);
       line-height: 1;
       margin-bottom: 8px;
     }
-    .card p { font-size: 14px; margin: 0; color: var(--gray); }
+    .card p { font-size: 13px; margin: 0; color: var(--gray); }
 
     /* STEPS */
-    .steps { counter-reset: step; }
     .step {
       display: flex;
       gap: 24px;
-      margin-bottom: 40px;
-      align-items: flex-start;
+      margin-bottom: 48px;
     }
     .step-num {
       flex-shrink: 0;
@@ -118,72 +129,152 @@
       background: linear-gradient(135deg, #FF5757, #8C52FF);
       color: var(--white);
       font-weight: 800;
-      font-size: 18px;
+      font-size: 17px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .step-body { flex: 1; }
-    .step-body h3 { color: var(--gray); }
+    .step-body h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
 
     /* CODE */
     pre {
-      background: var(--gray-lt);
-      border-radius: 8px;
-      padding: 16px 20px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 10px;
+      padding: 20px 24px;
       font-size: 14px;
       overflow-x: auto;
-      margin: 12px 0;
-      line-height: 1.5;
+      margin: 14px 0;
+      line-height: 1.7;
     }
-    code { font-family: 'Menlo', 'Courier New', monospace; }
-    .comment { color: #858585; }
-    .cmd { color: var(--green); font-weight: 700; }
+    code {
+      font-family: 'Menlo', 'Courier New', monospace;
+    }
+    .comment { color: #6a9955; }
+    .cmd { color: #9cdcfe; }
+    .str { color: #ce9178; }
 
-    /* NOTE */
+    /* INLINE CODE */
+    p code, li code {
+      background: var(--gray-lt);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--pink);
+    }
+
+    /* NOTE / TIP */
     .note {
       background: var(--pink-lt);
       border-left: 4px solid var(--pink);
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 10px 10px 0;
       padding: 16px 20px;
       font-size: 14px;
       margin: 16px 0;
+      line-height: 1.6;
     }
     .note strong { color: var(--pink); }
 
-    /* B4B SECTION */
-    .b4b {
-      background: #f9f9f9;
+    .tip {
+      background: #e6f4f2;
+      border-left: 4px solid var(--green);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      font-size: 14px;
+      margin: 16px 0;
+      line-height: 1.6;
+    }
+    .tip strong { color: var(--green); }
+
+    /* TERMINAL HINT */
+    .terminal-hint {
+      background: var(--gray-lt);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .terminal-hint h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--pink);
+    }
+    .terminal-hint ol { padding-left: 20px; }
+    .terminal-hint li { margin-bottom: 6px; }
+    kbd {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-family: monospace;
+      box-shadow: 0 1px 0 #ccc;
+    }
+
+    /* B4B FLOW */
+    .b4b-box {
+      background: var(--pink-lt);
       border-radius: 16px;
-      padding: 40px;
+      padding: 40px 32px;
       text-align: center;
     }
-    .b4b h2 { border: none; padding: 0; text-align: center; }
+    .b4b-box h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
     .flow {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 32px 0;
+      margin-bottom: 32px;
     }
     .flow-item {
       background: var(--white);
       border: 2px solid var(--pink);
       border-radius: 8px;
-      padding: 12px 20px;
+      padding: 10px 18px;
       font-size: 14px;
       font-weight: 700;
     }
     .flow-arrow { color: var(--pink); font-size: 20px; font-weight: 700; }
 
+    /* FAQ */
+    .faq-item {
+      border: 1px solid var(--gray-lt);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .faq-item h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--pink);
+    }
+    .faq-item p { margin: 0; font-size: 14px; }
+
     /* FOOTER */
     footer {
       text-align: center;
-      padding: 40px 24px;
+      padding: 48px 24px;
       font-size: 13px;
-      color: #999;
+      color: var(--gray-md);
       border-top: 1px solid var(--gray-lt);
+    }
+    footer a { color: var(--pink); }
+
+    @media (max-width: 600px) {
+      .step { flex-direction: column; gap: 12px; }
+      .hero { padding: 56px 24px; }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
@@ -192,16 +283,24 @@
 
 <!-- HERO -->
 <div class="hero">
-  <p class="label">B4B × Claude Code</p>
+  <p class="label">B4B × Claude Code 自動化ガイド</p>
   <h1>フォーム営業を<br>AIに丸投げする</h1>
-  <p>Browser Use CLI 2.0 を使えば、Claude Code がブラウザを操作してフォーム送信まで自動でやってくれる。</p>
-  <span class="badge">⚡ 速度2倍・コスト半額 — 2025年3月リリース</span>
+  <p>Browser Use を使えば、Claude Code がブラウザを自動操作してフォーム送信までやってくれる。難しい設定は不要。このページの手順通りに進めればOK。</p>
+  <div class="badges">
+    <span class="badge">⚡ 速度2倍・コスト半額（2025年3月）</span>
+    <span class="badge">🖥️ Mac / Windows 対応</span>
+  </div>
 </div>
+
+<div class="container">
 
 <!-- WHAT IS -->
 <section>
-  <h2>Browser Use とは？</h2>
-  <p>AIがChromeを直接操作できるようにするオープンソースのツール。「このフォームを入力して送信して」と指示するだけで、Claude Code が実際に画面を見ながら操作してくれる。</p>
+  <h2>Browser Use って何？</h2>
+  <p>
+    AIがChromeを「目で見て・手で操作する」ように動かせるオープンソースのツールです。
+    Claude Code に「このフォームに入力して送信して」と日本語で指示するだけで、実際に画面を操作してくれます。
+  </p>
   <div class="cards">
     <div class="card">
       <div class="num">2×</div>
@@ -213,122 +312,192 @@
     </div>
     <div class="card">
       <div class="num">CDP</div>
-      <p>既存のChromeに<br>そのまま接続</p>
+      <p>普段使いのChromeに<br>そのまま接続できる</p>
+    </div>
+  </div>
+  <div class="tip">
+    <strong>B4Bへの直結ポイント：</strong>
+    企業URLのリストを渡せば、フォーム入力→送信→結果記録まで自動でこなします。担当者が一件ずつ手入力する作業を、まるごと自動化できます。
+  </div>
+</section>
+
+<!-- BEFORE START -->
+<section>
+  <h2>始める前に確認すること</h2>
+
+  <div class="step">
+    <div class="step-num">✓</div>
+    <div class="step-body">
+      <h3>ターミナル（黒い画面）の開き方</h3>
+      <p>これ以降の手順は、すべてターミナルに文字を入力して進めます。</p>
+      <div class="terminal-hint">
+        <h4>📌 Macの場合</h4>
+        <ol>
+          <li>キーボードで <kbd>⌘ Command</kbd> + <kbd>スペース</kbd> を押す</li>
+          <li>「ターミナル」と入力して <kbd>Enter</kbd></li>
+          <li>黒または白いウィンドウが開いたらOK</li>
+        </ol>
+      </div>
+      <div class="terminal-hint">
+        <h4>📌 Windowsの場合</h4>
+        <ol>
+          <li>スタートメニューを右クリック</li>
+          <li>「Windows PowerShell」または「ターミナル」をクリック</li>
+        </ol>
+      </div>
+      <div class="note">
+        <strong>コマンドの実行方法：</strong> この後に出てくるコードブロック（黒い背景の部分）をコピーして、ターミナルに貼り付けて <kbd>Enter</kbd> を押すだけです。
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">✓</div>
+    <div class="step-body">
+      <h3>Anthropic の API キーを用意する</h3>
+      <p>Claude Code を動かすための「鍵」です。まだ持っていない場合は先に取得してください。</p>
+      <ol style="padding-left:20px; margin-bottom:12px;">
+        <li style="margin-bottom:6px;"><a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> にアクセス（Googleアカウントでログイン可）</li>
+        <li style="margin-bottom:6px;">左メニューの「API Keys」→「Create Key」</li>
+        <li style="margin-bottom:6px;"><code>sk-ant-...</code> で始まる文字列をメモ帳などに控えておく</li>
+      </ol>
+      <div class="note">
+        <strong>注意：</strong> APIキーは一度しか表示されません。必ずその場でコピーしてどこかに保存してください。
+      </div>
     </div>
   </div>
 </section>
 
-<!-- INSTALL STEPS -->
+<!-- INSTALL -->
 <section>
-  <h2>インストール手順</h2>
+  <h2>インストール手順（5ステップ）</h2>
 
-  <div class="steps">
-
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <h3>uv をインストールする</h3>
-        <p>Python製ツールの高速インストーラー。まずこれを入れる。</p>
-        <pre><code><span class="comment"># macOS / Linux</span>
-<span class="cmd">curl -LsSf https://astral.sh/uv/install.sh | sh</span>
-
-<span class="comment"># Homebrew が好きな人はこちら</span>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h3>uv をインストールする</h3>
+      <p>Python 製ツールを簡単に管理できるインストーラーです。まずこれを入れます。</p>
+      <pre><code><span class="comment"># Mac / Linux の場合</span>
+<span class="cmd">curl -LsSf https://astral.sh/uv/install.sh | sh</span></code></pre>
+      <pre><code><span class="comment"># Homebrew を使っている場合はこちらでも OK</span>
 <span class="cmd">brew install uv</span></code></pre>
-        <p>インストール後、ターミナルを再起動するか <code>source ~/.zshrc</code> を実行する。</p>
+      <div class="tip">
+        <strong>完了の確認：</strong> コマンドが終わったら、一度ターミナルを閉じて再度開いてください。その後 <code>uv --version</code> と入力して、バージョンが表示されればOKです。
       </div>
     </div>
+  </div>
 
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <h3>Browser Use CLI をインストールする</h3>
-        <pre><code><span class="cmd">uv tool install "browser-use[cli]"</span></code></pre>
-        <div class="note">
-          <strong>確認：</strong> <code>browser-use --version</code> でバージョンが表示されればOK。
-        </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h3>Browser Use をインストールする</h3>
+      <pre><code><span class="cmd">uv tool install "browser-use[cli]"</span></code></pre>
+      <div class="tip">
+        <strong>完了の確認：</strong> <code>browser-use --version</code> と入力してバージョンが表示されればOK。
       </div>
     </div>
+  </div>
 
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <h3>Playwright のブラウザをセットアップ</h3>
-        <p>Browser Use が使うChromeの自動化エンジンを入れる。</p>
-        <pre><code><span class="cmd">playwright install chromium</span></code></pre>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h3>ブラウザ自動化エンジンをセットアップする</h3>
+      <p>Browser Use が使う専用のChromeエンジンをダウンロードします。少し時間がかかります。</p>
+      <pre><code><span class="cmd">playwright install chromium</span></code></pre>
+      <div class="note">
+        <strong>「playwright が見つかりません」と出た場合：</strong><br>
+        <code>uv tool install playwright</code> を先に実行してから、再度上のコマンドを試してください。
       </div>
     </div>
+  </div>
 
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-body">
-        <h3>APIキーを設定する</h3>
-        <p>Claude Code（Anthropic）のAPIキーを環境変数に設定する。</p>
-        <pre><code><span class="comment"># ~/.zshrc または ~/.bashrc に追記</span>
-<span class="cmd">export ANTHROPIC_API_KEY="sk-ant-..."</span>
-
-<span class="comment"># 反映</span>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h3>APIキーを設定する</h3>
+      <p>さきほど取得した <code>sk-ant-...</code> のキーを設定します。</p>
+      <pre><code><span class="comment"># Mac / Linux の場合（以下を1行ずつ実行）</span>
+<span class="cmd">echo 'export ANTHROPIC_API_KEY="sk-ant-ここにキーを貼る"' >> ~/.zshrc</span>
 <span class="cmd">source ~/.zshrc</span></code></pre>
-        <div class="note">
-          <strong>APIキーの取得：</strong> <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys から発行する。
-        </div>
+      <pre><code><span class="comment"># Windows PowerShell の場合</span>
+<span class="cmd">$env:ANTHROPIC_API_KEY="sk-ant-ここにキーを貼る"</span></code></pre>
+      <div class="note">
+        <strong>注意：</strong> <code>sk-ant-ここにキーを貼る</code> の部分を、実際のAPIキーに置き換えてください。クォート（ <code>"</code> ）は消さないこと。
       </div>
     </div>
+  </div>
 
-    <div class="step">
-      <div class="step-num">5</div>
-      <div class="step-body">
-        <h3>動作確認</h3>
-        <p>試しに動かしてみる。</p>
-        <pre><code><span class="cmd">browser-use "Google を開いて、検索窓に『Browser Use』と入力して"</span></code></pre>
-        <p>Chromeが自動で動き出せばインストール完了。</p>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <h3>動作確認</h3>
+      <p>試しに動かしてみましょう。Chromeが自動で操作されれば成功です。</p>
+      <pre><code><span class="cmd">browser-use "Googleを開いて、検索窓に『Browser Use』と入力して"</span></code></pre>
+      <div class="tip">
+        <strong>成功すると：</strong> 自動でChromeが起動して、Googleで検索を実行します。これができればインストール完了です。
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- B4B USE CASE -->
 <section>
-  <div class="b4b">
-    <h2>フォーム営業への応用イメージ</h2>
-    <p style="margin-top:16px; color:#555;">対象企業リストを用意すれば、あとは Claude Code + Browser Use が自動でやってくれる。</p>
+  <h2>フォーム営業への応用</h2>
+
+  <div class="b4b-box">
+    <h3>自動化できる一連の流れ</h3>
     <div class="flow">
-      <div class="flow-item">企業URLリスト</div>
+      <div class="flow-item">📋 企業URLリスト</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-item">フォーム検出</div>
+      <div class="flow-item">🔍 フォーム検出</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-item">自動入力・送信</div>
+      <div class="flow-item">✍️ 自動入力・送信</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-item">ログ記録</div>
+      <div class="flow-item">📊 結果を記録</div>
     </div>
-    <pre style="text-align:left; margin-top:8px;"><code><span class="comment"># Claude Code に指示するイメージ</span>
-<span class="cmd">browser-use "companies.csv を読み込んで、各URLのお問い合わせフォームに
+  </div>
+
+  <p style="margin-top:24px;">企業URLを並べたCSVファイルを用意して、以下のように Claude Code に指示するだけで動きます。</p>
+  <pre><code><span class="cmd">browser-use "companies.csv を読み込んで、各企業のお問い合わせフォームに
 会社名『B4B』、担当者名『山田』、メッセージ『〇〇についてご相談したい』
-と入力して送信してください。送信結果をresult.csvに記録してください。"</span></code></pre>
+と入力して送信してください。送信できた企業を result.csv に記録してください。"</span></code></pre>
+  <div class="note">
+    <strong>まず小さく始めるのがおすすめ：</strong> 最初は1社だけのURLで試してみてください。動作を確認してから、複数社に広げると安心です。
   </div>
 </section>
 
-<!-- TIPS -->
+<!-- FAQ -->
 <section>
-  <h2>トークン節約のコツ（Browser Use 編）</h2>
-  <div class="step">
-    <div class="step-body">
-      <h3>既存のChromeに接続する</h3>
-      <p>毎回新しいブラウザを起動するとコストがかかる。<code>--cdp-url</code> で既存のChromeに接続すると起動コスト不要で高速。</p>
-      <pre><code><span class="cmd">browser-use --cdp-url http://localhost:9222 "..."</span></code></pre>
-    </div>
+  <h2>よくある質問</h2>
+
+  <div class="faq-item">
+    <h4>Q. Pythonは必要ですか？</h4>
+    <p>uv が自動で管理するので、Pythonを別途インストールする必要はありません。</p>
   </div>
-  <div class="step">
-    <div class="step-body">
-      <h3>タスクを細かく分割する</h3>
-      <p>「全部やって」より「フォームを見つける」→「入力する」→「送信する」と分けた方がトークンが少なくて済む。失敗したときの修正も楽になる。</p>
-    </div>
+
+  <div class="faq-item">
+    <h4>Q. エラーが出て進めない場合は？</h4>
+    <p>エラーメッセージをそのままコピーして Claude Code（または ChatGPT）に貼り付けて「これどうすればいい？」と聞くのが一番早いです。</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Q. 既存のChromeをそのまま使えますか？</h4>
+    <p>はい。<code>--cdp-url http://localhost:9222</code> オプションで、ログイン済みのChromeに直接接続できます。サイトへのログインも引き継がれます。</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Q. コストはどのくらいかかりますか？</h4>
+    <p>タスクの複雑さとフォーム数によります。目安として、シンプルなフォーム100件あたり数十円〜数百円程度です。/compact コマンドでセッションを圧縮するとコストを抑えられます。</p>
   </div>
 </section>
+
+</div><!-- /container -->
 
 <footer>
-  B4B × Claude Code — Browser Use クイックスタート<br>
-  <a href="https://github.com/browser-use/browser-use" target="_blank" style="color:#A51E6D;">Browser Use 公式リポジトリ</a>
+  B4B × Claude Code 自動化ガイド<br>
+  <a href="https://github.com/browser-use/browser-use" target="_blank">Browser Use 公式リポジトリ（GitHub）</a>
+  &nbsp;·&nbsp;
+  <a href="https://console.anthropic.com" target="_blank">Anthropic Console（APIキー）</a>
 </footer>
 
 </body>
